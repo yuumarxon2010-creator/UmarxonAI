@@ -2,7 +2,7 @@ name: Build Android APK
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "main", "master", "asosiy" ]
 
 jobs:
   build:
@@ -12,10 +12,10 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Set up JDK 21
+    - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
-        java-version: '21'
+        java-version: '17'
         distribution: 'temurin'
 
     - name: Setup Gradle
@@ -29,6 +29,8 @@ jobs:
       run: |
         if [ -f "gradlew" ]; then
           ./gradlew assembleDebug --no-daemon
+        elif [ -f "ilova/gradlew" ]; then
+          cd ilova && ./gradlew assembleDebug --no-daemon
         else
           gradle assembleDebug --no-daemon
         fi
@@ -36,5 +38,5 @@ jobs:
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: app-debug
+        name: UmarxonAI-debug-apk
         path: "**/build/outputs/apk/debug/*.apk"
