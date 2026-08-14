@@ -1,0 +1,6 @@
+{
+  "name": "UmarxonAI",
+  "description": "Universal AI yordamchi va ijodiy studiya: savol-javob, rasm yaratish, video rejissyorlik va intellekt.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
