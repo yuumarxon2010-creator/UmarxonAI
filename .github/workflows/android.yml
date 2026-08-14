@@ -2,7 +2,7 @@ name: Build Android APK
 
 on:
   push:
-    branches: [ "main", "master", "asosiy" ]
+    branches: [ "main", "master" ]
 
 jobs:
   build:
@@ -19,18 +19,10 @@ jobs:
         distribution: 'temurin'
 
     - name: Make gradlew executable
-      run: |
-        find . -name "gradlew" -exec chmod +x {} +
+      run: chmod +x ./gradlew || true
 
     - name: Build Debug APK
-      run: |
-        if [ -f "gradlew" ]; then
-          ./gradlew assembleDebug --no-daemon --stacktrace
-        elif [ -f "ilova/gradlew" ]; then
-          cd ilova && ./gradlew assembleDebug --no-daemon --stacktrace
-        else
-          gradle assembleDebug --no-daemon --stacktrace
-        fi
+      run: ./gradlew assembleDebug --no-daemon
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
